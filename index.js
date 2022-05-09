@@ -16,11 +16,19 @@ async function run() {
         await client.connect();
         const carProduct = client.db("user").collection("car");
         console.log("db is connected");
+
+        
         app.post('/upload', async (req, res) => {
             const product = req.body;
             const result = await carProduct.insertOne(product);
             res.send(result);
             console.log(product);
+        })
+        app.get('/upload', async (req, res) => {
+            const quary = {};
+            const coursor = carProduct.find(quary);
+            const result = await coursor.toArray();
+            res.send(result);
         })
 
         
@@ -41,9 +49,3 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-// car
-// UBYyfyAGMcMh1jEB
-
-// 
-
-// 
